@@ -1,0 +1,15 @@
+apiVersion: skaffold/v2beta12
+kind: Config
+metadata:
+  name: repo-fresh-start
+deploy:
+  kubectl:
+    manifests:
+    - calculator-service/target/classes/META-INF/dekorate/kubernetes.json
+    - calculator-service/target/classes/META-INF/dekorate/kubernetes.yml
+
+build:
+  artifacts:
+    - image: dave/calculator-service
+      context: .
+      jib: {}
