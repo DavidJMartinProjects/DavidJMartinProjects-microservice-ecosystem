@@ -1,7 +1,7 @@
 apiVersion: skaffold/v2beta12
 kind: Config
 metadata:
-  name: repo-fresh-start
+  name: microservice-ecosystem
 deploy:
   kubectl:
     manifests:
@@ -9,7 +9,12 @@ deploy:
     - calculator-service/target/classes/META-INF/dekorate/kubernetes.yml
 
 build:
+  tagPolicy:
+    sha256: {}
   artifacts:
     - image: dave/calculator-service
       context: .
       jib: {}
+
+  local:
+    push: false     # Set true to a push built images to remote Docker repository
